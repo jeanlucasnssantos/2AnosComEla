@@ -281,7 +281,7 @@
           <p id="counter"></p>
         </div>
         <div class="message" id="previewMessage">
-          Meu amor... Hoje meu coração transborda de felicidade 🤍 celebramos mais um ano juntos, e eu só tenho a agradecer à vida por ter você comigo! Nosso amor cresceu, amadureceu e se fortaleceu a cada desafio vencido. Você é o melhor presente que eu poderia ter, minha parceira, minha cúmplice, minha melhor amiga, minha companheira que quero comigo em todos os momentos, minha felicidade diária, minha amorosa, carinhosa, charmosa, minha gracinha KKKKKKKKK, minha LINDA, a melhor namorada do mundo e a que eu sonhei por toda a vida ter um dia... Esse dia seria o dia 05/03/23. Você não faz ideia do quão bom é viver essa vida louca contigo, mesmo à distância fisicamente, sinto nossos corações perto. Você sempre será a mulher chegou na minha vida pra mudar ela, e isso você fez com esse seu brilho surreal que reluz por onde passa. Hoje, me sinto o homem mais feliz e sortudo que existe por ser esse homem com quem você compartilha seus dias, suas horas, seus minutos e cada segundo... Você é o amor da minha vida. Que venham pra nós todos os anos de amor, cumplicidade e alegria. EU TE AMO além das palavras, e esse meu amor por você só cresce! 💞😍
+          Meu amor... Hoje meu coração transborda de felicidade 🤍 celebramos mais um ano juntos, e eu só tenho a agradecer à vida por ter você comigo! Nosso amor cresceu, amadureceu e se fortaleceu a cada desafio vencido. Você é o melhor presente que eu poderia ter, minha parceira, minha cúmplice, minha melhor amiga, minha companheira que quero comigo em todos os momentos... Minha felicidade diária, minha amorosa, carinhosa, charmosa, meu denguinho, minha gracinha KKKKKKKKKK, minha LINDA, minha princesa encantada, a melhor namorada do mundo e a que eu sonhei por toda a vida ter um dia... Sim, esse dia seria o dia 05/03/23, meu bem. Você não faz ideia do quão bom é viver essa vida louca contigo, mesmo à distância fisicamente, sinto nossos corações tão pertos. Você sempre será a mulher que chegou na minha vida pra mudar ela, e conseguiu isso com esse seu brilho surreal que reluz por onde passa, você me fez esse bobo apaixonado por você. Hoje, me sinto o homem mais feliz e sortudo que existe por ser esse homem com quem você compartilha seus dias, suas horas, seus minutos e cada segundo... Você é o amor da minha vida, e eu só tenho a te agradecer por ser simplesmente a garota dos meus sonhos. Que venham pra nós todos os anos que a vida nos der de amor, cumplicidade e alegria. EU TE AMO além das palavras, e esse meu amor por você só cresce! 💞😍
         </div>
         <!-- Jogo da Forca -->
         <div id="hangman-game">
@@ -487,7 +487,7 @@
         guessedLetters[nextLetterIndex] = letter;
         nextLetterIndex++;
         const remainingLetters = guessedLetters.filter(letter => letter === " ").length;
-        document.getElementById("message").textContent = `Acertou, mô! 😍 Hehe, só mais ${remainingLetters}`;
+        document.getElementById("message").textContent = `Acertou, mô! 😍 Hehe, só mais ${remainingLetters}...`;
         input.focus();
       } else {
         document.getElementById("message").textContent = "Errou, neném, tenta de novo... 👀😍";
@@ -497,7 +497,7 @@
       displayWord();
 
       if (!guessedLetters.includes(" ")) {
-        document.getElementById("message").textContent = "UHUUUUUUUUU, parabéns! Completou a palavra, gatinha! 😍 EU TE AMO *💋💋💋* hehe";
+        document.getElementById("message").textContent = "UHUUUUUUUUU, parabéns! Acertou em cheio, gatinha, sempre será VOCÊ! 😍 EU TE AMO *💋💋💋* hehe";
         document.getElementById("letter-input").classList.add("hidden");
         document.querySelector("#hangman-game button").classList.add("hidden");
 
