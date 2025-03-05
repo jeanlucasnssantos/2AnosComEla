@@ -6,6 +6,7 @@
   <title>05/03/25 - 2 ANOS... J&B 🤍</title>
   <!-- Fonte romântica -->
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css? family=Cedarville Cursive' rel='stylesheet'>
   <style>
     /* Estilos gerais */
     body {
@@ -63,7 +64,7 @@
       padding: 10px;
       background-color: #ebebeb;
       border-radius: 10px;
-      font-family: cursive;
+      font-family: 'Cedarville Cursive', cursive;
     }
     .music-area {
       display: flex;
@@ -87,7 +88,7 @@
       color: white;
       font-weight: bold;
       cursor: pointer;
-      max-width: 600px;
+      max-width: 1200px;
       margin: 20px auto;
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
       transition: background 0.3s;
@@ -180,7 +181,6 @@
       text-align: center;
       margin: 20px auto;
       margin-top: 20px;
-      width: 70%;
     }
     #love-counter p {
       font-size: 20px;
@@ -271,6 +271,8 @@
         <div class="gallery" id="previewGallery">
           <img src="1.jpg" alt="Imagem do Amor">
           <img src="2.png" alt="Imagem do Amor">
+          <img src="3.png" alt="Imagem do Amor">
+          <img src="4.png" alt="Imagem do Amor">
         </div>
         <!-- Contador de Amor -->
         <div id="love-counter">
@@ -478,14 +480,16 @@
         nextLetterIndex++;
         const remainingLetters = guessedLetters.filter(letter => letter === "_").length;
         document.getElementById("message").textContent = `Acertou, mô! 😍 Hehe, só mais ${remainingLetters}`;
+        input.focus();
       } else {
         document.getElementById("message").textContent = "Errou, neném, tenta de novo... 👀😍";
+        input.focus();
       }
 
       displayWord();
 
       if (!guessedLetters.includes(" ")) {
-        document.getElementById("message").textContent = "Uhuuuuuu, parabéns! Completou a palavra, gatinha! 😍 *💋💋💋* hehe";
+        document.getElementById("message").textContent = "Uhuuuuuu, parabéns! Completou a palavra, gatinha! 😍<br>EU TE AMO *💋💋💋* hehe";
         document.getElementById("letter-input").classList.add("hidden");
         document.querySelector("#hangman-game button").classList.add("hidden");
 
