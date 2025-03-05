@@ -103,15 +103,6 @@
     .audio-bar .play-btn {
       font-size: 1.8em;
       margin-left: 10px;
-      margin-bottom: 3px;
-      width: 30px;
-      height: 32px;
-      border: 2px solid rgba(255, 228, 243, 0.744);
-      border-radius: 50%;
-      padding: 1px;
-      line-height: 32px;
-      flex-shrink: 0;
-      padding-left: 3px;
     }
     .audio-bar .heart-icon {
       width: 60px;
@@ -312,7 +303,7 @@
     <div class="audio-bar" onclick="togglePlay()">
       <img src="heart.png" alt="Coração" class="heart-icon">
       <span id="musicTitlePreview">Christina Perry - A Thousand Years</span>
-      <div class="play-btn" id="playPauseBtn">⏵︎</div>
+      <div class="play-btn" id="playPauseBtn">▶️</div>
       <!-- Barra de progresso do player -->
       <div class="progress-bar">
         <div class="progress" id="progress"></div>
@@ -369,11 +360,11 @@
     function onPlayerStateChange(event) {const heartIcon = document.querySelector('.heart-icon');
       if (event.data == YT.PlayerState.PLAYING) {
         playing = true;
-        document.getElementById("playPauseBtn").innerText = "⏸︎";
+        document.getElementById("playPauseBtn").innerText = "⏸️";
         heartIcon.classList.add('beating');
       } else {
         playing = false;
-        document.getElementById("playPauseBtn").innerText = "⏵︎";
+        document.getElementById("playPauseBtn").innerText = "▶️";
         heartIcon.classList.remove('beating');
       }
     }
