@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>05/03/25 - 2 ANOS... J&B 🤍</title>
+  <!-- Fonte romântica -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+  <style>
+    /* Estilos gerais */
+    body {
+      font-family: 'Dancing Script', cursive;
+      background: linear-gradient(135deg, #FFC0CB, #FFF0F5);
+      margin: 0;
+      padding: 0;
+      color: #333;
+      overflow-x: hidden;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 20px;
+      margin-bottom: 100px;
+    }
+    .preview-section {
+      flex: 1 1 100%;
+      padding: 20px;
+    }
+    @media(min-width: 768px) {
+      .preview-section {
+        flex: 1 1 50%;
+      }
+    }
+    .preview-section {
+      background: rgba(255,255,255,0.95);
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 10px 0;
+      background-color: #ebebeb;
+      border-radius: 10px;
+    }
+    .gallery img {
+      width: 150px;
+      height: auto;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+    .message {
+      font-size: 1.5em;
+      text-align: center;
+      padding: 10px;
+      background-color: #ebebeb;
+      border-radius: 10px;
+      font-family: cursive;
+    }
+    .music-area {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 10px 0;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      height: 100px; /* Ajuste a altura conforme necessário */
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra para destaque */
+    }
+    .audio-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(135deg, #FF7EB9, #FF4081);
+      padding: 5px 15px;
+      border-radius: 10px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      max-width: 600px;
+      margin: 20px auto;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: background 0.3s;
+      position: fixed;
+      bottom: 4px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+    }
+    .audio-bar:hover {
+      background: linear-gradient(135deg, #FF4081, #FF7EB9);
+    }
+    .audio-bar .play-btn {
+      font-size: 1.8em;
+      margin-left: 10px;
+    }
+    .audio-bar .heart-icon {
+      width: 60px;
+      height: auto;
+      margin-right: 10px;
+    }
+    @keyframes heartbeat {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.2);
+      }
+    }
+    .heart-icon.beating {
+      animation: heartbeat 1s infinite;
+    }
+    .audio-bar span {
+      flex-grow: 1;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 200, 234, 0.4);
+      margin: 10px auto;
+      border-radius: 5px;
+      overflow: hidden;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+      position: fixed;
+      bottom: -20px;
+      left: 0;
+      z-index: 1000;
+    }
+    .progress {
+      width: 0%;
+      height: 100%;
+      background: #ff0000;
+      border-radius: 5px;
+      transition: width 0.2s ease;
+    }
+    .video-container {
+      position: absolute;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+      left: -9999px;
+    }
+    .floating-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+    }
+    .heart {
+      position: absolute;
+      color: red;
+      font-size: 30px;
+      animation: float linear infinite;
+      text-shadow: 0px 0px 10px rgba(255,255,255,0.5);
+    }
+    @keyframes float {
+      0% {
+        transform: translate(-10vh, -10vh) scale(1) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(5vh, 100vh) scale(1.5) rotate(var(--end-rotate-angle, 180deg));
+        opacity: 0;
+      }
+    }
+    #love-counter {
+      text-align: center;
+      margin: 20px auto;
+      margin-top: 20px;
+      width: 70%;
+    }
+    #love-counter p {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    #counter {
+      font-size: 30px;
+    }
+    /* Estilizando a barra de rolagem */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #ebebeb;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #beb3b3;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #FF7EB9;
+    }
+    .letter-box {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      background-color: #ffdfea;
+      border: 1px solid #333333;
+      margin: 5px;
+      text-align: center;
+      line-height: 30px;
+      font-size: 1.5em;
+      text-transform: uppercase;
+    }
+    #hangman-game {
+      text-align: center;
+      margin-top: 20px;
+    }
+    #word-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+    #letter-input {
+      text-align: center;
+      border-radius: 6px;
+    }
+    .hidden {
+      display: none;
+    }
+    .sunflower {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 100px; /* Defina um tamanho fixo ou máximo */
+      height: 100px; /* Defina um tamanho fixo ou máximo */
+      transform: translate(-50%, -50%);
+      animation: growAndFade 10s ease-in-out forwards;
+    }
+
+    @keyframes growAndFade {
+      0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(5);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Corações flutuantes -->
+  <div class="floating-hearts" id="hearts-container"></div>
+
+  <div class="container">
+    <!-- Seção de Prévia -->
+    <div class="preview-section">
+      <div class="preview-content">
+        <h1 id="previewCoupleName">Jean & Bia</h1>
+        <div class="gallery" id="previewGallery">
+          <img src="fotos/1.jpg" alt="Imagem do Amor">
+          <img src="fotos/2.png" alt="Imagem do Amor">
+        </div>
+        <!-- Contador de Amor -->
+        <div id="love-counter">
+          <p id="counter"></p>
+        </div>
+        <div class="message" id="previewMessage">
+          Meu amor... Hoje meu coração transborda de felicidade 🤍 celebramos mais um ano juntos, e eu só tenho a agradecer à vida por ter você comigo! Nosso amor cresceu, amadureceu e se fortaleceu a cada desafio vencido. Você é o melhor presente que eu poderia ter, minha parceira, minha cúmplice, minha melhor amiga, minha companheira que quero comigo em todos os momentos, minha felicidade diária, minha amorosa, carinhosa, charmosa, minha gracinha KKKKKKKKK, minha LINDA, a melhor namorada do mundo e a que eu sonhei por toda a vida ter um dia... Esse dia seria o dia 05/03/23. Você não faz ideia do quão bom é viver essa vida louca contigo, mesmo à distância fisicamente, sinto nossos corações perto. Você sempre será a mulher chegou na minha vida pra mudar ela, e isso você fez com esse seu brilho surreal que reluz por onde passa. Hoje, me sinto o homem mais feliz e sortudo que existe por ser esse homem com quem você compartilha seus dias, suas horas, seus minutos e cada segundo... Você é o amor da minha vida. Que venham pra nós todos os anos de amor, cumplicidade e alegria. EU TE AMO além das palavras, e esse meu amor por você só cresce! 💞😍
+        </div>
+        <!-- Jogo da Forca -->
+        <div id="hangman-game">
+          <h2>Quem é o amor da minha vida?</h2>
+          <div id="word-container"></div>
+          <input type="text" id="letter-input" maxlength="1" placeholder="Digita uma letra, mô 👀">
+          <button onclick="checkLetter()">Acertei?</button>
+          <p id="message"></p>
+        </div>
+        <!-- Vídeo do YouTube oculto (para reproduzir somente o áudio) -->
+        <div class="video-container">
+          <iframe id="youtubePlayer" src="https://www.youtube.com/embed/zc-KM-pUpnw?enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Player de áudio personalizado -->
+  <div class="music-area">
+    <div class="audio-bar" onclick="togglePlay()">
+      <img src="heart.png" alt="Coração" class="heart-icon">
+      <span id="musicTitlePreview">Christina Perry - A Thousand Years</span>
+      <div class="play-btn" id="playPauseBtn">▶️</div>
+      <!-- Barra de progresso do player -->
+      <div class="progress-bar">
+        <div class="progress" id="progress"></div>
+      </div>
+    </div>
+  </div>
+
+  <img src="girassol.png" alt="Girassol" class="sunflower hidden" id="sunflower">
+
+  <script>
+    // Função para criar corações flutuantes
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+
+      // Cria a imagem e a adiciona ao coração
+      const heartImage = document.createElement('img');
+      heartImage.src = 'heart.png';  // Substitua pelo caminho da sua imagem
+      heartImage.alt = 'Coração';
+      heartImage.style.width = '40px';  // Ajuste o tamanho desejado
+      heartImage.style.height = 'auto'; // Mantém a proporção
+      heart.appendChild(heartImage);
+
+      document.getElementById('hearts-container').appendChild(heart);
+
+      const startX = Math.random() * window.innerWidth;
+      heart.style.left = startX + 'px';
+      const duration = Math.random() * 5 + 5; // Aumenta a duração para 5-10 segundos
+      heart.style.animationDuration = duration + 's';
+      heart.style.fontSize = Math.random() * 20 + 20 + 'px';
+
+      // Define rotação aleatória entre -180 e 180 graus
+      const startRotateAngle = (Math.random() * 360 - 180) + 'deg';
+      const endRotateAngle = (Math.random() * 360 - 180) + 'deg';
+      heart.style.setProperty('--end-rotate-angle', endRotateAngle);
+
+      setTimeout(() => { heart.remove(); }, duration * 1000);
+    }
+    setInterval(createHeart, 300);
+    // Controle do player de áudio via API do YouTube
+    let player;
+    let playing = false;
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('youtubePlayer', {
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange
+        }
+      });
+    }
+    function onPlayerReady(event) {
+      event.target.setVolume(100);
+    }
+    function onPlayerStateChange(event) {const heartIcon = document.querySelector('.heart-icon');
+      if (event.data == YT.PlayerState.PLAYING) {
+        playing = true;
+        document.getElementById("playPauseBtn").innerText = "⏸️";
+        heartIcon.classList.add('beating');
+      } else {
+        playing = false;
+        document.getElementById("playPauseBtn").innerText = "▶️";
+        heartIcon.classList.remove('beating');
+      }
+    }
+    function togglePlay() {
+      if (player) {
+        if (playing) {
+          player.pauseVideo();
+        } else {
+          player.playVideo();
+        }
+      }
+    }
+    // Atualiza a barra de progresso a cada 500ms
+    setInterval(() => {
+      if (player && player.getCurrentTime && playing) {
+        let progress = (player.getCurrentTime() / player.getDuration()) * 100;
+        document.getElementById("progress").style.width = progress + "%";
+      }
+    }, 500);
+    // Carrega a API do YouTube
+    let tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    let firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // Data do início do relacionamento (exemplo: 1 de Janeiro de 2020)
+    const startDate = new Date('2023-03-05T00:00:00');
+
+    function calcularTempoJuntos(dataInicio) {
+      const agora = new Date();
+      const inicio = dataInicio;
+
+      // Calculando a diferença em milissegundos
+      const dif = agora - inicio;
+
+      // Calculando a diferença em anos, meses, dias, horas, minutos e segundos
+      let anos = agora.getUTCFullYear() - inicio.getUTCFullYear();
+      let meses = agora.getUTCMonth() - inicio.getUTCMonth();
+      let dias = agora.getUTCDate() - inicio.getUTCDate();
+      let horas = agora.getUTCHours() - inicio.getUTCHours();
+      let minutos = agora.getUTCMinutes() - inicio.getUTCMinutes();
+      let segundos = agora.getUTCSeconds() - inicio.getUTCSeconds();
+
+      // Ajustando os valores negativos
+      if (segundos < 0) {
+        segundos += 60;
+        minutos -= 1;
+      }
+      if (minutos < 0) {
+        minutos += 60;
+        horas -= 1;
+      }
+      if (horas < 0) {
+        horas += 24;
+        dias -= 1;
+      }
+      if (dias < 0) {
+        meses -= 1;
+        const ultimoDiaMesAnterior = new Date(agora.getUTCFullYear(), agora.getUTCMonth(), 0).getUTCDate();
+        dias += ultimoDiaMesAnterior;
+      }
+      if (meses < 0) {
+        anos -= 1;
+        meses += 12;
+      }
+
+      // Formatação da diferença
+      return {
+        anos,
+        meses,
+        dias,
+        horas,
+        minutos,
+        segundos
+      };
+    }
+
+    // Função para atualizar o contador
+    function updateLoveCounter() {
+      const now = new Date();
+
+      const tempoJuntos = calcularTempoJuntos(startDate);
+
+      // Exibindo a diferença no formato desejado
+      const counterText = `Juntos há: ${tempoJuntos.anos} anos, ${tempoJuntos.meses} meses, ${tempoJuntos.dias} dias, ${tempoJuntos.horas} horas, ${tempoJuntos.minutos} minutos e ${tempoJuntos.segundos} segundos`;
+
+      // Atualizando o texto do contador
+      document.getElementById('counter').textContent = counterText;
+    }
+
+    // Atualiza o contador a cada segundo
+    setInterval(updateLoveCounter, 1000);
+
+    // Chama a função uma vez para inicializar
+    updateLoveCounter();
+
+
+    const word = "BEATRIZ";
+    const guessedLetters = Array(word.length).fill(" ");
+
+    function displayWord() {
+      const wordContainer = document.getElementById("word-container");
+      wordContainer.innerHTML = guessedLetters.map(letter => `<span class="letter-box">${letter}</span>`).join("");
+    }
+
+    let nextLetterIndex = 0;
+
+    function checkLetter() {
+      const input = document.getElementById("letter-input");
+      const letter = input.value.toUpperCase();
+      input.value = "";
+
+      if (letter && word[nextLetterIndex] === letter) {
+        guessedLetters[nextLetterIndex] = letter;
+        nextLetterIndex++;
+        const remainingLetters = guessedLetters.filter(letter => letter === "_").length;
+        document.getElementById("message").textContent = `Acertou, mô! 😍 Hehe, só mais ${remainingLetters}`;
+      } else {
+        document.getElementById("message").textContent = "Errou, neném, tenta de novo... 👀😍";
+      }
+
+      displayWord();
+
+      if (!guessedLetters.includes(" ")) {
+        document.getElementById("message").textContent = "Uhuuuuuu, parabéns! Completou a palavra, gatinha! 😍 *💋💋💋* hehe";
+        document.getElementById("letter-input").classList.add("hidden");
+        document.querySelector("#hangman-game button").classList.add("hidden");
+
+        const sunflower = document.getElementById("sunflower");
+        sunflower.classList.remove("hidden");
+      }
+    }
+
+    displayWord();
+  </script>
+
+</body>
+</html>
