@@ -346,6 +346,8 @@
     // Controle do player de áudio via API do YouTube
     let player;
     let playing = false;
+    let lastTime = 0;
+    let stagnantCounter = 0;
 
     function onYouTubeIframeAPIReady() {
       player = new YT.Player('youtubePlayer', {
@@ -373,14 +375,8 @@
         heartIcon.classList.remove('beating');
       }
 
-      // Verifica se é anúncio e pula automaticamente
-      setTimeout(() => {
-        if (player.getDuration() === 0) { // Duração 0 geralmente indica anúncio
-          console.log("Anúncio detectado, recarregando...");
-          player.stopVideo();
-          player.playVideo();
-        }
-      }, 1000);
+      // Removemos a abordagem baseada em getDuration() para detectar anúncios,
+      // pois ela nem sempre é eficaz.
     }
 
     // Alterna entre play e pause
@@ -394,13 +390,32 @@
       }
     }
 
-    // Atualiza a barra de progresso
+    // Atualiza a barra de progresso e detecta travamentos/anúncios pela estagnação do tempo
     setInterval(() => {
-      if (player && player.getCurrentTime && playing) {
-        let progress = (player.getCurrentTime() / player.getDuration()) * 100;
+      if (player && playing) {
+        let currentTime = player.getCurrentTime();
+
+        // Verifica se o tempo não avançou (diferença menor que 0.1 segundo)
+        if (Math.abs(currentTime - lastTime) < 0.1) {
+          stagnantCounter++;
+        } else {
+          stagnantCounter = 0;
+          lastTime = currentTime;
+        }
+
+        // Se por 3 segundos consecutivos o tempo não avançou, tenta recarregar o vídeo
+        if (stagnantCounter >= 3) {
+          console.log("Possível anúncio ou travamento detectado, recarregando o vídeo...");
+          stagnantCounter = 0;
+          player.stopVideo();
+          player.playVideo();
+        }
+
+        // Atualiza a barra de progresso
+        let progress = (currentTime / player.getDuration()) * 100;
         document.getElementById("progress").style.width = progress + "%";
       }
-    }, 500);
+    }, 1000);
 
     // Carrega a API do YouTube
     let tag = document.createElement('script');
