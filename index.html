@@ -212,11 +212,13 @@
       text-align: center;
       line-height: 30px;
       font-size: 1.5em;
-      text-transform: uppercase;
+      font-family: 'Dancing Script', cursive;
     }
     #hangman-game {
       text-align: center;
       margin-top: 20px;
+      font-family: "Courgette", cursive;
+      font-size: small;
     }
     #word-container {
       display: flex;
@@ -285,7 +287,7 @@
         <div id="hangman-game">
           <h2>Quem é o amor da minha vida?</h2>
           <div id="word-container"></div>
-          <input type="text" id="letter-input" maxlength="1" placeholder="Digita uma letra, mô 👀">
+          <input type="text" id="letter-input" maxlength="1" placeholder="Digita uma letra, mô 👀" onkeypress="handleKeyPress(event)">
           <button onclick="checkLetter()">Acertei?</button>
           <p id="message"></p>
         </div>
@@ -470,6 +472,12 @@
 
     let nextLetterIndex = 0;
 
+    function handleKeyPress(event) {
+      if (event.key === 'Enter') {
+        checkLetter();
+      }
+    }
+
     function checkLetter() {
       const input = document.getElementById("letter-input");
       const letter = input.value.toUpperCase();
@@ -489,7 +497,7 @@
       displayWord();
 
       if (!guessedLetters.includes(" ")) {
-        document.getElementById("message").textContent = "Uhuuuuuu, parabéns! Completou a palavra, gatinha! 😍<br>EU TE AMO *💋💋💋* hehe";
+        document.getElementById("message").textContent = "UHUUUUUUUUU, parabéns! Completou a palavra, gatinha! 😍 EU TE AMO *💋💋💋* hehe";
         document.getElementById("letter-input").classList.add("hidden");
         document.querySelector("#hangman-game button").classList.add("hidden");
 
