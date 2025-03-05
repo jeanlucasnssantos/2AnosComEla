@@ -6,7 +6,7 @@
   <title>05/03/25 - 2 ANOS... J&B 🤍</title>
   <!-- Fonte romântica -->
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
-  <link href='https://fonts.googleapis.com/css? family=Cedarville Cursive' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Dancing+Script:wght@400..700&family=Style+Script&display=swap" rel="stylesheet">
   <style>
     /* Estilos gerais */
     body {
@@ -64,7 +64,7 @@
       padding: 10px;
       background-color: #ebebeb;
       border-radius: 10px;
-      font-family: 'Cedarville Cursive', cursive;
+      font-family: "Courgette", cursive;
     }
     .music-area {
       display: flex;
@@ -88,13 +88,12 @@
       color: white;
       font-weight: bold;
       cursor: pointer;
-      width: 100%; /* Define a largura como 100% */
+      width: 80%; /* Define a largura como 100% */
       margin: 20px auto;
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
       transition: background 0.3s;
       position: fixed;
       bottom: 4px;
-      left: 0; /* Alinha à esquerda */
       transform: translateX(0); /* Remove a transformação */
       z-index: 1000;
     }
@@ -227,6 +226,7 @@
     #letter-input {
       text-align: center;
       border-radius: 6px;
+      font-family: "Courgette", cursive;
     }
     .hidden {
       display: none;
@@ -478,7 +478,7 @@
       if (letter && word[nextLetterIndex] === letter) {
         guessedLetters[nextLetterIndex] = letter;
         nextLetterIndex++;
-        const remainingLetters = guessedLetters.filter(letter => letter === "_").length;
+        const remainingLetters = guessedLetters.filter(letter => letter === " ").length;
         document.getElementById("message").textContent = `Acertou, mô! 😍 Hehe, só mais ${remainingLetters}`;
         input.focus();
       } else {
