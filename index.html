@@ -293,7 +293,7 @@
         </div>
         <!-- Vídeo do YouTube oculto (para reproduzir somente o áudio) -->
         <div class="video-container">
-          <iframe id="youtubePlayer" src="https://www.youtube.com/embed/zc-KM-pUpnw?enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          <iframe id="youtubePlayer" src="https://www.youtube-nocookie.com/embed/zc-KM-pUpnw?enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
       </div>
     </div>
@@ -346,9 +346,6 @@
     // Controle do player de áudio via API do YouTube
     let player;
     let playing = false;
-    let lastTime = 0;
-    let stagnantCounter = 0;
-
     function onYouTubeIframeAPIReady() {
       player = new YT.Player('youtubePlayer', {
         events: {
@@ -357,15 +354,11 @@
         }
       });
     }
-
     function onPlayerReady(event) {
       event.target.setVolume(100);
     }
-
-    function onPlayerStateChange(event) {
-      const heartIcon = document.querySelector('.heart-icon');
-
-      if (event.data === YT.PlayerState.PLAYING) {
+    function onPlayerStateChange(event) {const heartIcon = document.querySelector('.heart-icon');
+      if (event.data == YT.PlayerState.PLAYING) {
         playing = true;
         document.getElementById("playPauseBtn").innerText = "⏸️";
         heartIcon.classList.add('beating');
@@ -374,12 +367,7 @@
         document.getElementById("playPauseBtn").innerText = "▶️";
         heartIcon.classList.remove('beating');
       }
-
-      // Removemos a abordagem baseada em getDuration() para detectar anúncios,
-      // pois ela nem sempre é eficaz.
     }
-
-    // Alterna entre play e pause
     function togglePlay() {
       if (player) {
         if (playing) {
@@ -389,34 +377,13 @@
         }
       }
     }
-
-    // Atualiza a barra de progresso e detecta travamentos/anúncios pela estagnação do tempo
+    // Atualiza a barra de progresso a cada 500ms
     setInterval(() => {
-      if (player && playing) {
-        let currentTime = player.getCurrentTime();
-
-        // Verifica se o tempo não avançou (diferença menor que 0.1 segundo)
-        if (Math.abs(currentTime - lastTime) < 0.1) {
-          stagnantCounter++;
-        } else {
-          stagnantCounter = 0;
-          lastTime = currentTime;
-        }
-
-        // Se por 3 segundos consecutivos o tempo não avançou, tenta recarregar o vídeo
-        if (stagnantCounter >= 3) {
-          console.log("Possível anúncio ou travamento detectado, recarregando o vídeo...");
-          stagnantCounter = 0;
-          player.stopVideo();
-          player.playVideo();
-        }
-
-        // Atualiza a barra de progresso
-        let progress = (currentTime / player.getDuration()) * 100;
+      if (player && player.getCurrentTime && playing) {
+        let progress = (player.getCurrentTime() / player.getDuration()) * 100;
         document.getElementById("progress").style.width = progress + "%";
       }
-    }, 1000);
-
+    }, 500);
     // Carrega a API do YouTube
     let tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
